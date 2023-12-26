@@ -32,6 +32,9 @@ function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
 
   detailsContainer.innerHTML = `
+    <div style="text-align: center;">
+      <img src="https://image.tmdb.org/t/p/w300${details.poster_path}" alt="${details.title || details.name}">
+    </div>
     <h2>${details.title || details.name}</h2>
     <p>Type: ${mediaType}</p>
     <p>${details.overview}</p>
