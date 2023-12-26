@@ -17,27 +17,17 @@ body {
 
 h1 {
   text-align: center;
-  color: #3498db; /* Light Blue */
-  margin-bottom: 20px;
 }
 
 input {
   width: 70%;
-  padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+  padding: 8px;
+  margin-right: 5px;
 }
 
 button {
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
-  background-color: #2ecc71; /* Light Green */
-  color: #fff;
-  border: none;
-  margin-top: 10px;
-  display: block; /* Make the button a block element to center it */
-  margin: 0 auto; /* Center the button */
 }
 
 #results, #details {
@@ -61,18 +51,8 @@ button {
 
 /* Add this CSS to your styles.css file */
 button {
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
-  background-color: #2ecc71; /* Light Green */
-  color: #fff;
-  border: none;
-  margin-top: 10px;
-  display: block; /* Make the button a block element to center it */
-  margin: 0 auto; /* Center the button */
-}
-
-#videoOptions {
-  text-align: center; /* Center the content inside videoOptions */
 }
 
 /* Position the button at the top-left corner */
@@ -81,3 +61,27 @@ button#homeButton {
   top: 10px;
   left: 10px;
 }
+
+/* Style for Watch Now button */
+button#watchNowButton {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #2ecc71; /* Light Green */
+  color: #fff;
+  border: none;
+  margin-top: 20px; /* Increase the space between dropdowns and button */
+  display: block; /* Make the button a block element to center it */
+  margin: 0 auto; /* Center the button */
+}
+
+#videoOptions {
+  text-align: center; /* Center the content inside videoOptions */
+}
+
+/* Style for Season and Episode dropdowns */
+select {
+  padding: 8px;
+  margin: 5px;
+}
+
+/* Add additional styling as needed */
