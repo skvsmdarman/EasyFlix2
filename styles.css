@@ -71,3 +71,7 @@ button#homeButton {
   top: 10px;
   left: 10px;
 }
+
+button#watchNowButton {
+margin-top: 5px;
+}
