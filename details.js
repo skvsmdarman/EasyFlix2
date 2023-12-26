@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (id && mediaType) {
     showDetails(id, mediaType);
   } else {
-    // Handle invalid or missing parameters
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
 });
@@ -62,32 +61,26 @@ function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    // Get selected season and episode
     const selectedSeason = seasonSelect.value;
     const selectedEpisode = episodeSelect.value;
 
-    // Display the video based on the selected season and episode
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
    console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
 }
 
 function updateVideo(id) {
-  // Get selected season and episode
   const selectedSeason = seasonSelect.value;
   const selectedEpisode = episodeSelect.value;
 
-  // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
  console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
 }
 
 
 function setupSeriesOptions(tvDetails) {
-  // Get the list of regular seasons (exclude specials)
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
 
-  // Populate the season dropdown
   regularSeasons.forEach(season => {
     const option = document.createElement('option');
     option.value = season.season_number;
@@ -95,17 +88,13 @@ function setupSeriesOptions(tvDetails) {
     seasonSelect.appendChild(option);
   });
 
-  // Handle the change event on the season dropdown
   seasonSelect.addEventListener('change', () => {
     const selectedSeason = parseInt(seasonSelect.value, 10);
 
-    // Find the selected season
     const selectedSeasonDetails = regularSeasons.find(season => season.season_number === selectedSeason);
 
-    // Clear existing episodes
     episodeSelect.innerHTML = '';
 
-    // Populate the episode dropdown based on the number of episodes in the selected season
     if (selectedSeasonDetails) {
       for (let i = 1; i <= selectedSeasonDetails.episode_count; i++) {
         const option = document.createElement('option');
@@ -116,7 +105,6 @@ function setupSeriesOptions(tvDetails) {
     }
   });
 
-  // Trigger the change event to populate the episode dropdown for the initial season
   seasonSelect.dispatchEvent(new Event('change'));
 }
 
