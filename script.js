@@ -1,7 +1,6 @@
 const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
-const detailsContainer = document.getElementById('details');
 
 function searchMovies() {
   const query = searchInput.value;
@@ -43,12 +42,11 @@ function displayResults(results) {
   });
 }
 
-function showDetails(id, mediaType) {
-  window.location.href = `details.html?id=${id}&mediaType=${mediaType}`;
-}
-
 function getReleaseYear(result) {
   const releaseDate = result.release_date || result.first_air_date;
   return releaseDate ? new Date(releaseDate).getFullYear() : '';
 }
 
+function showDetails(id, mediaType) {
+  window.location.href = `details.html?id=${id}&mediaType=${mediaType}`;
+}
