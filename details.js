@@ -53,7 +53,7 @@ function displayDetails(details, mediaType) {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
 } else if (mediaType === 'tv') {
     setupSeriesOptions(details.id);
-    watchNowButton.addEventListener('click', () => toggleVideoOptions());
+    videoOptionsContainer.style.display = 'block'
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
 }
 }
@@ -76,9 +76,6 @@ function updateVideo(id, selectedSeason, selectedEpisode) {
   watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
 }
 
-function toggleVideoOptions() {
-  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'none';
-}
 
 function setupSeriesOptions(tvId) {
   // Assuming you have information about the series (number of seasons, episodes, etc.)
@@ -99,10 +96,6 @@ function setupSeriesOptions(tvId) {
     option.textContent = `Episode ${i}`;
     episodeSelect.appendChild(option);
   }
-}
-
-function toggleVideoOptions() {
-  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'block';
 }
 
 function goHome() {
