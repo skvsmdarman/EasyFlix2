@@ -34,9 +34,8 @@ button {
   cursor: pointer;
 }
 
-/* Blue color for Home and Search buttons */
 button#homeButton, button#searchButton {
-  background-color: #3498db; /* Blue color */
+  background-color: #3498db;
   color: #fff;
   border: none;
 }
@@ -60,13 +59,11 @@ button#homeButton, button#searchButton {
   margin-right: 10px;
 }
 
-/* Add this CSS to your styles.css file */
 button {
   padding: 8px;
   cursor: pointer;
 }
 
-/* Position the button at the top-left corner */
 button#homeButton {
   position: absolute;
   top: 10px;
@@ -77,27 +74,25 @@ button#homeButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px; /* Add some space below the search options */
+  margin-bottom: 10px;
 }
 
-/* Style for Watch Now button */
 button#watchNowButton {
   padding: 10px;
   cursor: pointer;
-  background-color: #2ecc71; /* Light Green */
+  background-color: #2ecc71;
   color: #fff;
   border: none;
-  margin-top: 25px; /* Increase the space between dropdowns and button */
+  margin-top: 25px;
   margin-bottom: 10px;
-  display: block; /* Make the button a block element to center it */
-  margin: 0 auto; /* Center the button */
+  display: block;
+  margin: 0 auto;
 }
 
 #videoOptions {
-  text-align: center; /* Center the content inside videoOptions */
+  text-align: center;
 }
 
-/* Style for Season and Episode dropdowns */
 select {
   padding: 8px;
   margin: 5px;
@@ -123,11 +118,11 @@ select {
 }
 
 .result-card p.title {
-  color: green; /* Set the text color of the title to green */
+  color: green;
 }
 
 .result-card p {
-  margin: 0; /* Remove default margin for paragraphs */
+  margin: 0;
 }
 
 .result-card {
@@ -146,9 +141,9 @@ select {
 }
 
 .result-card p.title {
-  color: green; /* Set the text color of the title to green */
+  color: green;
 }
 
 .result-card p {
-  margin: 0; /* Remove default margin for paragraphs */
+  margin: 0;
 }
