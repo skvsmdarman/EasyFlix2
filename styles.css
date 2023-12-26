@@ -76,8 +76,8 @@ button#watchNowButton {
   background-color: #2ecc71; /* Light Green */
   color: #fff;
   border: none;
-  margin-top: 20px; /* Increase the space between dropdowns and button */
-  margin-bottom: 20px;
+  margin-top: 25px; /* Increase the space between dropdowns and button */
+  margin-bottom: 10px;
   display: block; /* Make the button a block element to center it */
   margin: 0 auto; /* Center the button */
 }
