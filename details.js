@@ -4,7 +4,6 @@ const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
-const videoContainer = document.getElementById('videoContainer'); // Move this outside the function
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -59,6 +58,7 @@ function displayDetails(details, mediaType) {
 }
 
 function openVideo(id, mediaType) {
+  var videoContainer = document.getElementById('videoContainer');
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
