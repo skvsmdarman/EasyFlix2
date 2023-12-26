@@ -4,7 +4,6 @@ const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
-const videoContainer = document.getElementById("videoContainer");
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,6 +56,7 @@ if (details.media_type === 'movie') {
   }
 }
 function openVideo(id, mediaType) {
+  var videoContainer = document.getElementById("videoContainer");
   let videoUrl = '';
 
   if (mediaType === 'movie') {
