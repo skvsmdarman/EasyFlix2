@@ -32,7 +32,7 @@ button {
 
 /* Blue color for Home and Search buttons */
 button#homeButton, button#searchButton {
-  background-color: #2ecc71; /* Blue color */
+  background-color: #3498db; /* Blue color */
   color: #fff;
   border: none;
 }
@@ -77,7 +77,6 @@ button#watchNowButton {
   color: #fff;
   border: none;
   margin-top: 20px; /* Increase the space between dropdowns and button */
-  margin-bottom: 20px
   display: block; /* Make the button a block element to center it */
   margin: 0 auto; /* Center the button */
 }
