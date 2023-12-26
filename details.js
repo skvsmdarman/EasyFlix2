@@ -58,6 +58,7 @@ function displayDetails(details, mediaType) {
 }
 
 function openVideo(id, mediaType) {
+  console.log('openVideo called with id:', id, 'mediaType:', mediaType);
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
