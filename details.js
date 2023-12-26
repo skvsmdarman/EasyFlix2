@@ -70,10 +70,6 @@ function openVideo(id, mediaType) {
 function updateVideo(id, selectedSeason, selectedEpisode) {
   // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-
-  // Update the event listener for the "Watch Now" button
-  watchNowButton.removeEventListener('click', () => toggleVideoOptions());
-  watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
 }
 
 
