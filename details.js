@@ -52,7 +52,7 @@ function displayDetails(details, mediaType) {
   if (mediaType === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
   } else if (mediaType === 'tv') {
-    setupSeriesOptions(details.id);
+    setupSeriesOptions(details);
     videoOptionsContainer.style.display = 'block';
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
   }
