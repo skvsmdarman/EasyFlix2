@@ -54,7 +54,6 @@ if (details.media_type === 'movie') {
     watchNowButton.addEventListener('click', () => toggleVideoOptions());
   }
 }
-
 function openVideo(id, mediaType) {
   let videoUrl = '';
 
@@ -66,7 +65,8 @@ function openVideo(id, mediaType) {
     videoUrl = `https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}`;
   }
 
-  window.open(videoUrl, '_blank');
+  const iframeCode = `<iframe src="${videoUrl}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+  detailsContainer.insertAdjacentHTML('beforeend', iframeCode);
 }
 
 function setupSeriesOptions(tvId) {
