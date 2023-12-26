@@ -1,0 +1,48 @@
+const apiKey = 'YOUR_TMDB_API_KEY';
+const detailsContainer = document.getElementById('details');
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  const mediaType = params.get('mediaType');
+  
+  if (id && mediaType) {
+    showDetails(id, mediaType);
+  } else {
+    // Handle invalid or missing parameters
+    detailsContainer.innerHTML = '<p>Invalid request</p>';
+  }
+});
+
+function showDetails(id, mediaType) {
+  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+
+  fetch(detailsUrl)
+    .then(response => response.json())
+    .then(data => {
+      displayDetails(data);
+    })
+    .catch(error => {
+      console.error('Error fetching details:', error);
+      detailsContainer.innerHTML = '<p>Error fetching details</p>';
+    });
+}
+
+function displayDetails(details) {
+  const genres = details.genres.map(genre => genre.name).join(', ');
+
+  detailsContainer.innerHTML = `
+    <h2>${details.title || details.name}</h2>
+    <p>${details.overview}</p>
+    <p>Release Date: ${details.release_date || details.first_air_date}</p>
+    <p>Rating: ${details.vote_average}</p>
+    <p>Genres: ${genres}</p>
+    <p>Language: ${details.original_language}</p>
+    <button onclick="watchNow('${details.title || details.name}')">Watch Now</button>
+  `;
+}
+
+function goHome() {
+  window.location.href = 'index.html';
+}
+
