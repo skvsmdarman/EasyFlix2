@@ -63,7 +63,6 @@ function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    watchNowButton.addEventListener('click', () => toggleVideoOptions());
     watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
   }
 }
