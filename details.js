@@ -72,10 +72,15 @@ function openVideo(id, mediaType) {
   }
 }
 
-function updateVideo(id, selectedSeason, selectedEpisode) {
+function updateVideo(id) {
+  // Get selected season and episode
+  const selectedSeason = seasonSelect.value;
+  const selectedEpisode = episodeSelect.value;
+
   // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
 }
+
 
 function setupSeriesOptions(tvId) {
   // Assuming you have information about the series (number of seasons, episodes, etc.)
