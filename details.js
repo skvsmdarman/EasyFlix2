@@ -68,7 +68,7 @@ function openVideo(id, mediaType) {
 
     // Display the video based on the selected season and episode
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-    console.log('seies called with id:', id, 'season:', selectedSeason, 'episode:' selectedEpisode);
+   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
 }
 
@@ -79,7 +79,7 @@ function updateVideo(id) {
 
   // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-  console.log('seies called with id:', id, 'season:', selectedSeason, 'episode:' selectedEpisode);
+ console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
 }
 
 
