@@ -30,26 +30,17 @@ function showDetails(id, mediaType) {
 
 function displayDetails(details) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
-  const type = details.media_type === 'movie' ? 'Movie' : 'TV Series';
 
   detailsContainer.innerHTML = `
     <h2>${details.title || details.name}</h2>
-    <p>Type: ${type}</p>
+    <p>Type: ${details.media_type}</p>
     <p>${details.overview}</p>
-    <p>Release Date: ${getYearRange(details)}</p>
+    <p>Release Date: ${details.release_date || details.first_air_date}</p>
     <p>Rating: ${details.vote_average}</p>
     <p>Genres: ${genres}</p>
     <p>Language: ${details.original_language}</p>
     <button onclick="watchNow('${details.title || details.name}')">Watch Now</button>
   `;
-}
-
-function getYearRange(details) {
-  if (details.media_type === 'tv' && details.first_air_date && details.last_air_date) {
-    return `${new Date(details.first_air_date).getFullYear()}-${new Date(details.last_air_date).getFullYear()}`;
-  } else {
-    return details.release_date ? new Date(details.release_date).getFullYear() : '';
-  }
 }
 
 function goHome() {
