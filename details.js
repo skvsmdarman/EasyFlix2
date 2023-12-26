@@ -37,17 +37,17 @@ function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
 
   detailsContainer.innerHTML = `
-    <div style="text-align: center;">
-      <img src="https://image.tmdb.org/t/p/w300${details.poster_path}" alt="${details.title || details.name}">
-    </div>
-    <h2>${details.title || details.name}</h2>
-    <p>Type: ${mediaType}</p>
-    <p>${details.overview}</p>
-    <p>Release Date: ${details.release_date || details.first_air_date}</p>
-    <p>Rating: ${details.vote_average}</p>
-    <p>Genres: ${genres}</p>
-    <p>Language: ${details.original_language}</p>
-  `;
+  <div style="text-align: center; margin-bottom: 20px;">
+    <img src="https://image.tmdb.org/t/p/w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
+  </div>
+  <h2 style="text-align: center; color: #3498db;">${details.title || details.name}</h2>
+  <p><strong>Type:</strong> ${mediaType}</p>
+  <p><strong>Overview:</strong> ${details.overview}</p>
+  <p><strong>Release Date:</strong> ${details.release_date || details.first_air_date}</p>
+  <p><strong>Rating:</strong> ${details.vote_average}</p>
+  <p><strong>Genres:</strong> ${genres}</p>
+  <p><strong>Language:</strong> ${details.original_language}</p>
+`;
 
   if (mediaType === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
