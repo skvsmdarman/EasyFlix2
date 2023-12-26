@@ -34,12 +34,24 @@ function displayResults(results) {
       <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
       <div>
         <p>${result.title || result.name}</p>
-        <p>${getReleaseYear(result)}</p>
+        <p>${getType(result)} (${getYearRange(result)})</p>
       </div>
     `;
     resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
     resultsContainer.appendChild(resultCard);
   });
+}
+
+function getType(result) {
+  return result.media_type === 'movie' ? 'Movie' : 'TV Series';
+}
+
+function getYearRange(result) {
+  if (result.media_type === 'tv' && result.first_air_date && result.last_air_date) {
+    return `${new Date(result.first_air_date).getFullYear()}-${new Date(result.last_air_date).getFullYear()}`;
+  } else {
+    return result.release_date ? new Date(result.release_date).getFullYear() : '';
+  }
 }
 
 function getReleaseYear(result) {
