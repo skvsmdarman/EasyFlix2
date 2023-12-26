@@ -49,9 +49,9 @@ function displayDetails(details, mediaType) {
     <p>Language: ${details.original_language}</p>
   `;
 
-  if (details.media_type === 'movie') {
+  if (${mediaType} === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
-  } else if (details.media_type === 'tv') {
+  } else if (${mediaType} === 'tv') {
     setupSeriesOptions(details.id);
     watchNowButton.addEventListener('click', () => toggleVideoOptions());
   }
