@@ -34,7 +34,7 @@ function displayResults(results) {
       resultCard.innerHTML = `
         <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
         <div>
-          <p>${result.title || result.name}</p>
+          <p class="title">${result.title || result.name}</p>
           <p>${result.media_type} (${getReleaseYear(result)})</p>
         </div>
       `;
