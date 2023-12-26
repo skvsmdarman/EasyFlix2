@@ -59,7 +59,6 @@ function displayDetails(details, mediaType) {
 }
 
 function openVideo(id, mediaType) {
-  console.log('openVideo called with id:', id, 'mediaType:', mediaType);
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
@@ -69,6 +68,7 @@ function openVideo(id, mediaType) {
 
     // Display the video based on the selected season and episode
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+    console.log('seies called with id:', id, 'season:', selectedSeason, 'episode:' selectedEpisode);
   }
 }
 
@@ -79,6 +79,7 @@ function updateVideo(id) {
 
   // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+  console.log('seies called with id:', id, 'season:', selectedSeason, 'episode:' selectedEpisode);
 }
 
 
