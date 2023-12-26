@@ -100,3 +100,26 @@ select {
   margin-top: 10px;
   padding-top: 10px;
 }
+
+.result-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.result-card img {
+  width: 50px;
+  height: 75px;
+  margin-right: 10px;
+}
+
+.result-card div {
+  color: green; /* Set the text color to green */
+}
+
+.result-card p {
+  margin: 0; /* Remove default margin for paragraphs */
+}
