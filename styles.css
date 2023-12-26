@@ -92,4 +92,7 @@ select {
   margin: 5px;
 }
 
-/* Add additional styling as needed */
+#videoContainer {
+  margin-top: 20px;
+  padding-top: 20px;
+}
