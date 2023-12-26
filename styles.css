@@ -18,16 +18,19 @@ body {
 h1 {
   text-align: center;
   color: #3498db; /* Light Blue */
+  margin-bottom: 20px;
 }
 
 input {
   width: 70%;
-  padding: 8px;
-  margin-right: 5px;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 button {
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
   background-color: #2ecc71; /* Light Green */
   color: #fff;
@@ -55,7 +58,7 @@ button {
 
 /* Add this CSS to your styles.css file */
 button {
-  padding: 8px;
+  padding: 10px;
   cursor: pointer;
   background-color: #2ecc71; /* Light Green */
   color: #fff;
