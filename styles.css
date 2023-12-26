@@ -1,6 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #2c3e50; /* Dark mode background color */
+  color: #fff; /* Dark mode text color */
   margin: 0;
   padding: 0;
 }
@@ -8,9 +9,9 @@ body {
 .container {
   max-width: 800px;
   margin: 20px auto;
-  background-color: #fff;
+  background-color: #34495e; /* Dark mode container background color */
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Adjust box-shadow for dark mode */
 }
 
 h1 {
@@ -25,6 +26,8 @@ input {
   width: 70%;
   padding: 8px;
   margin-right: 5px;
+  background-color: #3d5268; /* Dark mode input background color */
+  color: #fff; /* Dark mode input text color */
 }
 
 button {
@@ -43,12 +46,13 @@ button#homeButton, button#searchButton {
 }
 
 .result-card {
-  border: 1px solid #ddd;
+  border: 1px solid #455a75; /* Dark mode border color */
   padding: 10px;
   margin: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  background-color: #455a75; /* Dark mode card background color */
 }
 
 .result-card img {
@@ -100,46 +104,9 @@ select {
   margin-top: 10px;
   padding-top: 10px;
 }
-.result-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.result-card img {
-  width: 50px;
-  height: 75px;
-  margin-right: 10px;
-}
 
 .result-card p.title {
-  color: green;
-}
-
-.result-card p {
-  margin: 0;
-}
-
-.result-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.result-card img {
-  width: 50px;
-  height: 75px;
-  margin-right: 10px;
-}
-
-.result-card p.title {
-  color: green;
+  color: #2ecc71; /* Dark mode title color */
 }
 
 .result-card p {
