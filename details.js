@@ -51,11 +51,11 @@ function displayDetails(details, mediaType) {
 
   if (mediaType === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
-} else if (mediaType === 'tv') {
+  } else if (mediaType === 'tv') {
     setupSeriesOptions(details.id);
-    videoOptionsContainer.style.display = 'block'
+    videoOptionsContainer.style.display = 'block';
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
-}
+  }
 }
 
 function openVideo(id, mediaType) {
@@ -63,7 +63,12 @@ function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
+    // Get selected season and episode
+    const selectedSeason = seasonSelect.value;
+    const selectedEpisode = episodeSelect.value;
+
+    // Display the video based on the selected season and episode
+    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   }
 }
 
@@ -71,7 +76,6 @@ function updateVideo(id, selectedSeason, selectedEpisode) {
   // Display the video based on the selected season and episode
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
 }
-
 
 function setupSeriesOptions(tvId) {
   // Assuming you have information about the series (number of seasons, episodes, etc.)
