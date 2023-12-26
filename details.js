@@ -62,16 +62,8 @@ function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    // Get default season and episode
-    const defaultSeason = 1;
-    const defaultEpisode = 1;
-
-    // Set the default values in the selectors
-    seasonSelect.value = defaultSeason;
-    episodeSelect.value = defaultEpisode;
-
-    // Display the video
-    updateVideo(id, defaultSeason, defaultEpisode);
+    watchNowButton.addEventListener('click', () => toggleVideoOptions());
+    watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
   }
 }
 
