@@ -20,7 +20,7 @@ function showDetails(id, mediaType) {
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
-      displayDetails(data);
+      displayDetails(data, mediaType);
     })
     .catch(error => {
       console.error('Error fetching details:', error);
@@ -28,12 +28,12 @@ function showDetails(id, mediaType) {
     });
 }
 
-function displayDetails(details) {
+function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
 
   detailsContainer.innerHTML = `
     <h2>${details.title || details.name}</h2>
-    <p>Type: ${details.media_type}</p>
+    <p>Type: ${mediaType}</p>
     <p>${details.overview}</p>
     <p>Release Date: ${details.release_date || details.first_air_date}</p>
     <p>Rating: ${details.vote_average}</p>
