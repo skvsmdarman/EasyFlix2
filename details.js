@@ -29,7 +29,7 @@ function showDetails(id, mediaType) {
 }
 
 function displayDetails(details) {
-  const genres = details.genres.map(genre => genre.name).join(', ');
+  const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
 
   detailsContainer.innerHTML = `
     <h2>${details.title || details.name}</h2>
@@ -45,4 +45,3 @@ function displayDetails(details) {
 function goHome() {
   window.location.href = 'index.html';
 }
-
