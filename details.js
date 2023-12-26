@@ -4,6 +4,8 @@ const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
+const videoContainer = document.getElementById("videoContainer");
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -64,9 +66,8 @@ function openVideo(id, mediaType) {
     const selectedEpisode = episodeSelect.value;
     videoUrl = `https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}`;
   }
-
-  const iframeCode = `<iframe src="${videoUrl}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-  detailsContainer.insertAdjacentHTML('beforeend', iframeCode);
+  
+  videoContainer.innerHTML = `<iframe src="${videoUrl}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
 }
 
 function setupSeriesOptions(tvId) {
