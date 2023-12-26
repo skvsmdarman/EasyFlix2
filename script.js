@@ -28,17 +28,29 @@ function displayResults(results) {
   }
 
   results.forEach(result => {
-    const resultCard = document.createElement('div');
-    resultCard.classList.add('result-card');
-    resultCard.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
-      <div>
-        <p class="title">${result.title || result.name}</p>
-        <p>${result.media_type} (${getReleaseYear(result)})</p>
-      </div>
-    `;
-    resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
-    resultsContainer.appendChild(resultCard);
+    if (result.media_type !== 'person') {
+      const videoLink = (result.media_type === 'movie')
+        ? `https://vidsrc.to/embed/movie/${result.id}`
+        : `https://vidsrc.to/embed/tv/${result.id}/1/1`;
+
+      fetch(videoLink)
+        .then(response => {
+          if (response.status !== 404) {
+            const resultCard = document.createElement('div');
+            resultCard.classList.add('result-card');
+            resultCard.innerHTML = `
+              <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
+              <div>
+                <p>${result.title || result.name}</p>
+                <p>${result.media_type} (${getReleaseYear(result)})</p>
+              </div>
+            `;
+            resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
+            resultsContainer.appendChild(resultCard);
+          }
+        })
+        .catch(error => console.error('Error checking video link:', error));
+    }
   });
 }
 
