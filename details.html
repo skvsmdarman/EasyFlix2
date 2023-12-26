@@ -14,10 +14,9 @@
     <button id="watchNowButton" onclick="openVideo()">Watch Now</button>
     <div id="videoOptions" style="display: none;">
       <label for="seasonSelect">Season:</label>
-      <select id="seasonSelect"></select>
+      <select onclick="updateVideo()" id="seasonSelect"></select>
       <label for="episodeSelect">Episode:</label>
-      <select id="episodeSelect"></select>
-      <button onclick="updateVideo()">Watch Series</button>
+      <select onclick="updateVideo()" id="episodeSelect"></select>
     </div>
      <div id="videoContainer" class="video-container"></div>
   </div>
