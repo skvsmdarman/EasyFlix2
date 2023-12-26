@@ -1,5 +1,9 @@
 const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const detailsContainer = document.getElementById('details');
+const watchNowButton = document.getElementById('watchNowButton');
+const videoOptionsContainer = document.getElementById('videoOptions');
+const seasonSelect = document.getElementById('seasonSelect');
+const episodeSelect = document.getElementById('episodeSelect');
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -42,8 +46,52 @@ function displayDetails(details, mediaType) {
     <p>Rating: ${details.vote_average}</p>
     <p>Genres: ${genres}</p>
     <p>Language: ${details.original_language}</p>
-    <button onclick="watchNow('${details.title || details.name}')">Watch Now</button>
   `;
+if (details.media_type === 'movie') {
+    watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
+  } else if (details.media_type === 'tv') {
+    setupSeriesOptions(details.id);
+    watchNowButton.addEventListener('click', () => toggleVideoOptions());
+  }
+}
+
+function openVideo(id, mediaType) {
+  let videoUrl = '';
+
+  if (mediaType === 'movie') {
+    videoUrl = `https://vidsrc.to/embed/movie/${id}`;
+  } else if (mediaType === 'tv') {
+    const selectedSeason = seasonSelect.value;
+    const selectedEpisode = episodeSelect.value;
+    videoUrl = `https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}`;
+  }
+
+  window.open(videoUrl, '_blank');
+}
+
+function setupSeriesOptions(tvId) {
+  // Assuming you have information about the series (number of seasons, episodes, etc.)
+  // Update the following code based on your data
+  const numberOfSeasons = 5; // Replace with actual number of seasons
+  const numberOfEpisodes = 10; // Replace with actual number of episodes per season
+
+  for (let i = 1; i <= numberOfSeasons; i++) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = `Season ${i}`;
+    seasonSelect.appendChild(option);
+  }
+
+  for (let i = 1; i <= numberOfEpisodes; i++) {
+    const option = document.createElement('option');
+    option.value = i;
+    option.textContent = `Episode ${i}`;
+    episodeSelect.appendChild(option);
+  }
+}
+
+function toggleVideoOptions() {
+  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'none';
 }
 
 function goHome() {
