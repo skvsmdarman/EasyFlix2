@@ -54,7 +54,7 @@ function displayDetails(details, mediaType) {
 } else if (mediaType === 'tv') {
     setupSeriesOptions(details.id);
     watchNowButton.addEventListener('click', () => toggleVideoOptions());
-    watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
+    watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
 }
 }
 
@@ -102,7 +102,7 @@ function setupSeriesOptions(tvId) {
 }
 
 function toggleVideoOptions() {
-  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'none';
+  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'block';
 }
 
 function goHome() {
