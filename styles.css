@@ -1,3 +1,5 @@
+/* styles.css */
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -15,6 +17,7 @@ body {
 
 h1 {
   text-align: center;
+  color: #3498db; /* Light Blue */
 }
 
 input {
@@ -26,6 +29,9 @@ input {
 button {
   padding: 8px;
   cursor: pointer;
+  background-color: #2ecc71; /* Light Green */
+  color: #fff;
+  border: none;
 }
 
 #results, #details {
@@ -51,6 +57,9 @@ button {
 button {
   padding: 8px;
   cursor: pointer;
+  background-color: #2ecc71; /* Light Green */
+  color: #fff;
+  border: none;
 }
 
 /* Position the button at the top-left corner */
