@@ -83,25 +83,41 @@ function updateVideo(id) {
 }
 
 
-function setupSeriesOptions(tvId) {
-  // Assuming you have information about the series (number of seasons, episodes, etc.)
-  // Update the following code based on your data
-  const numberOfSeasons = 5; // Replace with actual number of seasons
-  const numberOfEpisodes = 10; // Replace with actual number of episodes per season
+function setupSeriesOptions(tvDetails) {
+  // Get the list of regular seasons (exclude specials)
+  const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
 
-  for (let i = 1; i <= numberOfSeasons; i++) {
+  // Populate the season dropdown
+  regularSeasons.forEach(season => {
     const option = document.createElement('option');
-    option.value = i;
-    option.textContent = `Season ${i}`;
+    option.value = season.season_number;
+    option.textContent = `Season ${season.season_number}`;
     seasonSelect.appendChild(option);
-  }
+  });
 
-  for (let i = 1; i <= numberOfEpisodes; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = `Episode ${i}`;
-    episodeSelect.appendChild(option);
-  }
+  // Handle the change event on the season dropdown
+  seasonSelect.addEventListener('change', () => {
+    const selectedSeason = parseInt(seasonSelect.value, 10);
+
+    // Find the selected season
+    const selectedSeasonDetails = regularSeasons.find(season => season.season_number === selectedSeason);
+
+    // Clear existing episodes
+    episodeSelect.innerHTML = '';
+
+    // Populate the episode dropdown based on the number of episodes in the selected season
+    if (selectedSeasonDetails) {
+      for (let i = 1; i <= selectedSeasonDetails.episode_count; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `Episode ${i}`;
+        episodeSelect.appendChild(option);
+      }
+    }
+  });
+
+  // Trigger the change event to populate the episode dropdown for the initial season
+  seasonSelect.dispatchEvent(new Event('change'));
 }
 
 function goHome() {
