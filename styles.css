@@ -35,6 +35,9 @@ button {
   background-color: #2ecc71; /* Light Green */
   color: #fff;
   border: none;
+  margin-top: 10px;
+  display: block; /* Make the button a block element to center it */
+  margin: 0 auto; /* Center the button */
 }
 
 #results, #details {
@@ -63,6 +66,13 @@ button {
   background-color: #2ecc71; /* Light Green */
   color: #fff;
   border: none;
+  margin-top: 10px;
+  display: block; /* Make the button a block element to center it */
+  margin: 0 auto; /* Center the button */
+}
+
+#videoOptions {
+  text-align: center; /* Center the content inside videoOptions */
 }
 
 /* Position the button at the top-left corner */
@@ -70,8 +80,4 @@ button#homeButton {
   position: absolute;
   top: 10px;
   left: 10px;
-}
-
-button#watchNowButton {
-margin-top: 5px;
 }
