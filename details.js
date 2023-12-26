@@ -62,10 +62,30 @@ function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+    // Get default season and episode
+    const defaultSeason = 1;
+    const defaultEpisode = 1;
+
+    // Set the default values in the selectors
+    seasonSelect.value = defaultSeason;
+    episodeSelect.value = defaultEpisode;
+
+    // Display the video
+    updateVideo(id, defaultSeason, defaultEpisode);
   }
+}
+
+function updateVideo(id, selectedSeason, selectedEpisode) {
+  // Display the video based on the selected season and episode
+  videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+
+  // Update the event listener for the "Watch Now" button
+  watchNowButton.removeEventListener('click', () => toggleVideoOptions());
+  watchNowButton.addEventListener('click', () => updateVideo(id, seasonSelect.value, episodeSelect.value));
+}
+
+function toggleVideoOptions() {
+  videoOptionsContainer.style.display = videoOptionsContainer.style.display === 'none' ? 'block' : 'none';
 }
 
 function setupSeriesOptions(tvId) {
