@@ -6,7 +6,6 @@ const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
 
-
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
@@ -50,12 +49,12 @@ function displayDetails(details, mediaType) {
     <p>Language: ${details.original_language}</p>
   `;
 
-  if (${mediaType} === 'movie') {
+  if (mediaType === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
-  } else if (${mediaType} === 'tv') {
+} else if (mediaType === 'tv') {
     setupSeriesOptions(details.id);
     watchNowButton.addEventListener('click', () => toggleVideoOptions());
-  }
+}
 }
 
 function openVideo(id, mediaType) {
