@@ -54,6 +54,7 @@ function displayDetails(details, mediaType) {
 } else if (mediaType === 'tv') {
     setupSeriesOptions(details.id);
     watchNowButton.addEventListener('click', () => toggleVideoOptions());
+    watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
 }
 }
 
