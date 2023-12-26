@@ -73,8 +73,11 @@ button#homeButton {
   left: 10px;
 }
 
-div#searchOption {
-  margin: 0 auto;
+#searchOption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Add some space below the search options */
 }
 
 /* Style for Watch Now button */
