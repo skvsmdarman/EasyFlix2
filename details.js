@@ -46,7 +46,3 @@ function displayDetails(details) {
 function goHome() {
   window.location.href = 'index.html';
 }
-
-function goHome() {
-  window.location.href = 'index.html';
-}
