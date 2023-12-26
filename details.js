@@ -1,4 +1,4 @@
-const apiKey = 'YOUR_TMDB_API_KEY';
+const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const detailsContainer = document.getElementById('details');
 
 document.addEventListener('DOMContentLoaded', () => {
