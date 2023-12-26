@@ -19,7 +19,7 @@ function searchMovies() {
   }
 }
 
-async function displayResults(results) {
+function displayResults(results) {
   resultsContainer.innerHTML = '';
 
   if (results.length === 0) {
@@ -27,33 +27,23 @@ async function displayResults(results) {
     return;
   }
 
-  for (const result of results) {
+  results.forEach(result => {
     if (result.media_type !== 'person') {
-      const videoLink = (result.media_type === 'movie')
-        ? `https://vidsrc.to/embed/movie/${result.id}`
-        : `https://vidsrc.to/embed/tv/${result.id}/1/1`;
-
-      try {
-        const response = await axios.head(videoLink);
-        if (response.status === 200) {
-          const resultCard = document.createElement('div');
-          resultCard.classList.add('result-card');
-          resultCard.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
-            <div>
-              <p>${result.title || result.name}</p>
-              <p>${result.media_type} (${getReleaseYear(result)})</p>
-            </div>
-          `;
-          resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
-          resultsContainer.appendChild(resultCard);
-        }
-      } catch (error) {
-        console.error('Error checking video link:', error);
-      }
+      const resultCard = document.createElement('div');
+      resultCard.classList.add('result-card');
+      resultCard.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
+        <div>
+          <p>${result.title || result.name}</p>
+          <p>${result.media_type} (${getReleaseYear(result)})</p>
+        </div>
+      `;
+      resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
+      resultsContainer.appendChild(resultCard);
     }
-  }
+  });
 }
+
 
 function getReleaseYear(result) {
   const releaseDate = result.release_date || result.first_air_date;
