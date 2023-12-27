@@ -10,10 +10,10 @@
   <div class="container">
     <h1>EasyFlix2</h1>
     
-    <div id="searchOption">
+    <form id="searchOption" onsubmit="searchMovies(); return false;">
       <input type="text" id="searchInput" placeholder="Search for a movie or TV series">
       <button id="searchButton" onclick="searchMovies()">Search</button>
-    </div>
+    </form>
     <div id="results"></div>
   </div>
   <script src="script.js"></script>
