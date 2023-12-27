@@ -72,9 +72,6 @@ function displayDetails(details, mediaType) {
   } else if (mediaType === 'tv') {
     setupSeriesOptions(details);
     videoOptionsContainer.style.display = 'block';
-    const seasonNumber = document.getElementById('seasonSelect').value;
-    const episodeNumber = document.getElementById('episodeSelect').value;
-    updateEpisodeDetails(details.id, seasonNumber, episodeNumber);
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
   }
 }
