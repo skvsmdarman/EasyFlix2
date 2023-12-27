@@ -6,13 +6,13 @@ const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
 
   if (id && mediaType) {
-    showDetails(id, mediaType);
+    await showDetails(id, mediaType);
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
@@ -34,21 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedEpisode = episodeSelect.value;
     updateEpisodeDetails(id, selectedSeason, selectedEpisode);
   });
+
+  // Trigger change event after setting up seasons and episodes
+  seasonSelect.dispatchEvent(new Event('change'));
+  episodeSelect.dispatchEvent(new Event('change'));
 });
 
-function showDetails(id, mediaType) {
-  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
-
-  fetch(detailsUrl)
-    .then(response => response.json())
-    .then(data => {
-      displayDetails(data, mediaType);
-    })
-    .catch(error => {
-      console.error('Error fetching details:', error);
-      detailsContainer.innerHTML = '<p>Error fetching details</p>';
-    });
-}
 
 function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
