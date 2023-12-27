@@ -29,17 +29,19 @@ function displayResults(results) {
 
   results.forEach(result => {
     if (result.media_type !== 'person') {
-      const resultCard = document.createElement('div');
-      resultCard.classList.add('result-card');
-      resultCard.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
-        <div>
-          <p class="title">${result.title || result.name}</p>
-          <p>${result.media_type} (${getReleaseYear(result)})</p>
-        </div>
-      `;
-      resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
-      resultsContainer.appendChild(resultCard);
+      if (checkVideoAvailabilityInVidSrc(result.media_type, result.id)) {
+        const resultCard = document.createElement('div');
+        resultCard.classList.add('result-card');
+        resultCard.innerHTML = `
+          <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
+          <div>
+            <p class="title">${result.title || result.name}</p>
+            <p>${result.media_type} (${getReleaseYear(result)})</p>
+          </div>
+        `;
+        resultCard.addEventListener('click', () => showDetails(result.id, result.media_type));
+        resultsContainer.appendChild(resultCard);
+    }
     }
   });
 }
@@ -57,4 +59,21 @@ function showDetails(id, mediaType) {
 function handleSearchFormSubmit(event) {
   event.preventDefault();
   searchMovies();
+}
+
+function checkVideoAvailabilityInVidSrc(type,videoId) {
+  const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://vidsrc.to/${type}/tv/${videoId}`)}`;
+
+  return fetch(apiUrl)
+    .then(response => {
+      if (response.ok) return response.json();
+      throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+      return data.status === 200;
+    })
+    .catch(error => {
+      console.error('Error checking video availability:', error);
+      return false;
+    });
 }
