@@ -147,8 +147,8 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
       } else {
         episodeDetailsContainer.innerHTML = `
           <h3>${details.name}</h3>
-          <p><strong>Overview:</strong>${details.overview}</p>
-          <p>Air Date: ${details.air_date}</p>
+          <p><strong>Overview: </strong>${details.overview}</p>
+          <p><strong>Air Date: </strong>${details.air_date}</p>
         `;
       }
     })
