@@ -91,7 +91,6 @@ function openVideo(id, mediaType) {
     const selectedEpisode = episodeSelect.value;
 
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
 }
 
