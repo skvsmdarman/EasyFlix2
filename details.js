@@ -65,44 +65,7 @@ function openVideo(id, mediaType) {
     const selectedEpisode = episodeSelect.value;
 
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
-}
-
-function updateEpisodeDetails() {
-  const selectedSeason = parseInt(seasonSelect.value, 10);
-  const selectedEpisode = parseInt(episodeSelect.value, 10);
-
-  const episodeDetailsContainer = document.getElementById('episodeDetails');
-  episodeDetailsContainer.innerHTML = '';
-
-  // Fetch episode details using the TMDB API
-  const seriesId = getParameterByName('id');
-  fetchEpisodeDetails(seriesId, selectedSeason, selectedEpisode);
-}
-
-// Fetch episode details from TMDB API
-function fetchEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
-  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}&language=en-US`;
-
-  fetch(episodeDetailsUrl)
-    .then(response => response.json())
-    .then(data => {
-      displayEpisodeDetails(data);
-    })
-    .catch(error => {
-      console.error('Error fetching episode details:', error);
-      const episodeDetailsContainer = document.getElementById('episodeDetails');
-      episodeDetailsContainer.innerHTML = '<p>Error fetching episode details</p>';
-    });
-
-function displayEpisodeDetails(episodeDetails) {
-  const episodeDetailsContainer = document.getElementById('episodeDetails');
-  episodeDetailsContainer.innerHTML = `
-    <h3>Episode Details:</h3>
-    <p><strong>Name:</strong> ${episodeDetails.name}</p>
-    <p><strong>Overview:</strong> ${episodeDetails.overview}</p>
-  `;
 }
 
 function updateVideo(id) {
@@ -110,6 +73,7 @@ function updateVideo(id) {
   const selectedEpisode = episodeSelect.value;
 
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+ console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
 }
 
 
@@ -145,4 +109,47 @@ function setupSeriesOptions(tvDetails) {
 
 function goHome() {
   window.location.href = 'index.html';
+}
+
+
+
+
+
+function updateEpisodeDetails() {
+  const selectedSeason = parseInt(seasonSelect.value, 10);
+  const selectedEpisode = parseInt(episodeSelect.value, 10);
+
+  const episodeDetailsContainer = document.getElementById('episodeDetails');
+  episodeDetailsContainer.innerHTML = '';
+
+  const seriesId = getParameterByName('id');
+  fetchEpisodeDetails(seriesId, selectedSeason, selectedEpisode);
+}
+
+
+function fetchEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}&language=en-US`;
+
+  fetch(episodeDetailsUrl)
+    .then(response => response.json())
+    .then(data => {
+      displayEpisodeDetails(data);
+    })
+    .catch(error => {
+      console.error('Error fetching episode details:', error);
+      const episodeDetailsContainer = document.getElementById('episodeDetails');
+      episodeDetailsContainer.innerHTML = '<p>Error fetching episode details</p>';
+    });
+}
+
+function displayEpisodeDetails(episodeDetails) {
+  const episodeDetailsContainer = document.getElementById('episodeDetails');
+  episodeDetailsContainer.innerHTML = `
+    <h3>Episode Details:</h3>
+    <p><strong>Name:</strong> ${episodeDetails.name}</p>
+    <p><strong>Overview:</strong> ${episodeDetails.overview}</p>
+    <p><strong>Air Date:</strong> ${episodeDetails.air_date}</p>
+    <p><strong>Episode Number:</strong> ${episodeDetails.episode_number}</p>
+    <p><strong>Vote Average:</strong> ${episodeDetails.vote_average}</p>
+  `;
 }
