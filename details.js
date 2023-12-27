@@ -133,6 +133,7 @@ function goHome() {
   window.location.href = 'index.html';
 }
 
+
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   // Construct the URL for fetching episode details
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
