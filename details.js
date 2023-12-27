@@ -5,6 +5,7 @@ const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
+var tvDetails; // Declare tvDetails at a higher scope
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -24,6 +25,9 @@ function showDetails(id, mediaType) {
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
+      if (mediaType === 'tv') {
+        tvDetails = data; // Assign data to tvDetails
+      }
       displayDetails(data, mediaType);
     })
     .catch(error => {
