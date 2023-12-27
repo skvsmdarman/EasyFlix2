@@ -53,6 +53,9 @@ function displayDetails(details, mediaType) {
   } else if (mediaType === 'tv') {
     setupSeriesOptions(details);
     videoOptionsContainer.style.display = 'block';
+    const seasonNumber = document.getElementById('seasonSelect').value;
+    const episodeNumber = document.getElementById('episodeSelect').value;
+    updateEpisodeDetails(details.id, seasonNumber, episodeNumber);
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
   }
 }
@@ -110,4 +113,34 @@ function setupSeriesOptions(tvDetails) {
 
 function goHome() {
   window.location.href = 'index.html';
+}
+
+function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+
+  // Construct the URL for fetching episode details
+  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
+
+  // Fetch episode details
+  fetch(episodeDetailsUrl)
+    .then(response => response.json())
+    .then(details => {
+      const episodeDetailsContainer = document.getElementById('episodeDetails');
+
+      // Check if there was an error
+      if (details.error) {
+        episodeDetailsContainer.innerHTML = `<p>${details.error}</p>`;
+      } else {
+        // Update the episode details in the HTML
+        episodeDetailsContainer.innerHTML = `
+          <h2>${details.name}</h2>
+          <p>${details.overview}</p>
+          <p>Air Date: ${details.air_date}</p>
+          <p>Episode Number: ${details.episode_number}</p>
+          <!-- Add more details as needed -->
+        `;
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching episode details:', error);
+    });
 }
