@@ -70,6 +70,7 @@ function checkVideoAvailabilityInVidSrc(type,videoId) {
       throw new Error('Network response was not ok.');
     })
     .then(data => {
+      console.log(12);
       return data.status === 200;
     })
     .catch(error => {
