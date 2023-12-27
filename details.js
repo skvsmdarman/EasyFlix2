@@ -80,14 +80,18 @@ function displayDetails(details, mediaType) {
 }
 
 function openVideo(id, mediaType) {
+
+  const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const aspectRatio = 16 / 9;
+  const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
+  
   if (mediaType === 'movie') {
-    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
     const selectedSeason = seasonSelect.value;
     const selectedEpisode = episodeSelect.value;
 
-    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
+    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   }
 }
 
