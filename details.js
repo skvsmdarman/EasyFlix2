@@ -16,24 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
-
-  watchNowButton.addEventListener('click', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    openVideo(id, mediaType, selectedSeason, selectedEpisode);
-  });
-
-  seasonSelect.addEventListener('change', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-  });
-
-  episodeSelect.addEventListener('change', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-  });
 });
 
 function showDetails(id, mediaType) {
@@ -43,12 +25,31 @@ function showDetails(id, mediaType) {
     .then(response => response.json())
     .then(data => {
       displayDetails(data, mediaType);
+
+      watchNowButton.addEventListener('click', () => {
+        const selectedSeason = seasonSelect.value;
+        const selectedEpisode = episodeSelect.value;
+        openVideo(id, mediaType, selectedSeason, selectedEpisode);
+      });
+
+      seasonSelect.addEventListener('change', () => {
+        const selectedSeason = seasonSelect.value;
+        const selectedEpisode = episodeSelect.value;
+        updateEpisodeDetails(id, selectedSeason, selectedEpisode);
+      });
+
+      episodeSelect.addEventListener('change', () => {
+        const selectedSeason = seasonSelect.value;
+        const selectedEpisode = episodeSelect.value;
+        updateEpisodeDetails(id, selectedSeason, selectedEpisode);
+      });
     })
     .catch(error => {
       console.error('Error fetching details:', error);
       detailsContainer.innerHTML = '<p>Error fetching details</p>';
     });
 }
+
 
 function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
