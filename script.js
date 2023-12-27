@@ -23,7 +23,7 @@ function displayResults(results) {
   resultsContainer.innerHTML = '';
 
   if (results.length === 0) {
-    resultsContainer.innerHTML = '<p>No results found.</p>';
+    resultsContainer.innerHTML = '<p class="noResult">No results found.</p>';
     return;
   }
 
