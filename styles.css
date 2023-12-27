@@ -109,6 +109,10 @@ select {
   color: #00ff00;
 }
 
+#noResults {
+  color: red;
+}
+
 .result-card p {
   margin: 0;
 }
