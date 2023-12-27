@@ -62,7 +62,7 @@ function handleSearchFormSubmit(event) {
 }
 
 function checkVideoAvailabilityInVidSrc(type,videoId) {
-  const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://vidsrc.to/${type}/tv/${videoId}`)}`;
+  const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://vidsrc.to/embed/${type}/${videoId}`)}`;
 
   return fetch(apiUrl)
     .then(response => {
