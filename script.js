@@ -53,3 +53,8 @@ function getReleaseYear(result) {
 function showDetails(id, mediaType) {
   window.location.href = `details.html?id=${id}&mediaType=${mediaType}`;
 }
+
+function handleSearchFormSubmit(event) {
+  event.preventDefault();
+  searchMovies();
+}
