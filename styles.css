@@ -125,6 +125,7 @@ select {
   select {
     display: block;
     width: 50%;
+    align-items: center;
     margin-bottom: 10px;
   }
 }
