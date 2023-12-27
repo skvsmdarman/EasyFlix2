@@ -17,7 +17,7 @@
     <h1>EasyFlix2</h1>
     
     <form id="searchOption" onsubmit="searchMovies(); return false;">
-      <input type="text" id="searchInput" placeholder="Search for a movie or TV series">
+      <input type="text" id="searchInput" oninput="searchMovies()" placeholder="Search for a movie or TV series">
       <button id="searchButton" onclick="searchMovies()">Search</button>
     </form>
     <div id="results"></div>
