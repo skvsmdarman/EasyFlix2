@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
+
+  watchNowButton.addEventListener('click', () => {
+    const selectedSeason = seasonSelect.value;
+    const selectedEpisode = episodeSelect.value;
+    openVideo(id, mediaType, selectedSeason, selectedEpisode);
+  });
+
+  seasonSelect.addEventListener('change', () => {
+    const selectedSeason = seasonSelect.value;
+    const selectedEpisode = episodeSelect.value;
+    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
+  });
+
+  episodeSelect.addEventListener('change', () => {
+    const selectedSeason = seasonSelect.value;
+    const selectedEpisode = episodeSelect.value;
+    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
+  });
 });
 
 function showDetails(id, mediaType) {
@@ -116,7 +134,6 @@ function goHome() {
 }
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
-
   // Construct the URL for fetching episode details
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
@@ -135,8 +152,6 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
           <h2>${details.name}</h2>
           <p>${details.overview}</p>
           <p>Air Date: ${details.air_date}</p>
-          <p>Episode Number: ${details.episode_number}</p>
-          <!-- Add more details as needed -->
         `;
       }
     })
