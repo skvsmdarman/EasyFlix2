@@ -6,40 +6,17 @@ const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
 
   if (id && mediaType) {
-    await showDetails(id, mediaType);
+    showDetails(id, mediaType);
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
-
-  watchNowButton.addEventListener('click', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    openVideo(id, mediaType, selectedSeason, selectedEpisode);
-  });
-
-  seasonSelect.addEventListener('change', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-  });
-
-  episodeSelect.addEventListener('change', () => {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-  });
-
-  // Trigger change event after setting up seasons and episodes
-  seasonSelect.dispatchEvent(new Event('change'));
-  episodeSelect.dispatchEvent(new Event('change'));
 });
-
 
 function showDetails(id, mediaType) {
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
@@ -91,6 +68,7 @@ function openVideo(id, mediaType) {
     const selectedEpisode = episodeSelect.value;
 
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
+   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
 }
 
@@ -138,20 +116,27 @@ function goHome() {
 }
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+
+  // Construct the URL for fetching episode details
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
+  // Fetch episode details
   fetch(episodeDetailsUrl)
     .then(response => response.json())
     .then(details => {
       const episodeDetailsContainer = document.getElementById('episodeDetails');
 
+      // Check if there was an error
       if (details.error) {
         episodeDetailsContainer.innerHTML = `<p>${details.error}</p>`;
       } else {
+        // Update the episode details in the HTML
         episodeDetailsContainer.innerHTML = `
-          <h3>${details.name}</h3>
-          <p><strong>Overview: </strong>${details.overview}</p>
-          <p><strong>Air Date: </strong>${details.air_date}</p>
+          <h2>${details.name}</h2>
+          <p>${details.overview}</p>
+          <p>Air Date: ${details.air_date}</p>
+          <p>Episode Number: ${details.episode_number}</p>
+          <!-- Add more details as needed -->
         `;
       }
     })
