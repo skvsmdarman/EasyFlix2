@@ -21,8 +21,9 @@
       <label for="seasonSelect">Season:</label>
       <select id="seasonSelect"></select>
       <label for="episodeSelect">Episode:</label>
-      <select id="episodeSelect"></select>
+      <select id="episodeSelect" onchange="updateEpisodeDetails()"></select>
     </div>
+    <div id="episodeDetails"></div>
     <button id="watchNowButton" onclick="openVideo()">Watch Now</button>
     <div id="videoContainer" class="video-container"></div>
   </div>
