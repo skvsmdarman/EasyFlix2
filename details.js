@@ -5,7 +5,6 @@ const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
-var tvDetails; // Declare tvDetails at a higher scope
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
@@ -25,9 +24,6 @@ function showDetails(id, mediaType) {
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
-      if (mediaType === 'tv') {
-        tvDetails = data; // Assign data to tvDetails
-      }
       displayDetails(data, mediaType);
     })
     .catch(error => {
@@ -69,8 +65,7 @@ function openVideo(id, mediaType) {
     const selectedEpisode = episodeSelect.value;
 
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-
-    updateEpisodeDetails(parseInt(selectedSeason, 10), parseInt(selectedEpisode, 10));
+   console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
   }
 }
 
@@ -79,9 +74,9 @@ function updateVideo(id) {
   const selectedEpisode = episodeSelect.value;
 
   videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
-
-  updateEpisodeDetails(parseInt(selectedSeason, 10), parseInt(selectedEpisode, 10));
+ console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
 }
+
 
 function setupSeriesOptions(tvDetails) {
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
@@ -108,35 +103,11 @@ function setupSeriesOptions(tvDetails) {
         episodeSelect.appendChild(option);
       }
     }
-
-    updateEpisodeDetails(selectedSeason, 1); // Display details for the first episode when season changes
   });
 
   seasonSelect.dispatchEvent(new Event('change'));
 }
 
-function updateEpisodeDetails(seasonNumber, episodeNumber) {
-  const episodeDetailsContainer = document.getElementById('episodeDetails');
-  const episodeNameElement = document.getElementById('episodeName');
-  const episodeOverviewElement = document.getElementById('episodeOverview');
-
-  const episode = getEpisodeDetails(seasonNumber, episodeNumber);
-
-  if (episode) {
-    episodeNameElement.textContent = episode.name;
-    episodeOverviewElement.textContent = episode.overview;
-  } else {
-    episodeNameElement.textContent = '';
-    episodeOverviewElement.textContent = '';
-  }
-}
-
-function getEpisodeDetails(seasonNumber, episodeNumber) {
-  const season = tvDetails.seasons.find(season => season.season_number === seasonNumber);
-
-  if (season && season.episodes) {
-    return season.episodes.find(episode => episode.episode_number === episodeNumber);
-  }
-
-  return null;
+function goHome() {
+  window.location.href = 'index.html';
 }
