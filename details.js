@@ -55,7 +55,49 @@ function displayDetails(details, mediaType) {
     videoOptionsContainer.style.display = 'block';
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
   }
+
+  const episodeNameElement = document.getElementById('episodeName');
+  const episodeOverviewElement = document.getElementById('episodeOverview');
+
+  if (details.episode_name && details.episode_overview) {
+    episodeNameElement.textContent = details.episode_name;
+    episodeOverviewElement.textContent = details.episode_overview;
+  } else {
+    episodeNameElement.textContent = '';
+    episodeOverviewElement.textContent = '';
+  }
 }
+
+function showDetails(id, mediaType) {
+  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+
+  fetch(detailsUrl)
+    .then(response => response.json())
+    .then(data => {
+      if (mediaType === 'tv') {
+        // Fetch episode details using the TV show id and selected season and episode
+        const selectedSeason = seasonSelect.value;
+        const selectedEpisode = episodeSelect.value;
+
+        const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${id}/season/${selectedSeason}/episode/${selectedEpisode}?api_key=${apiKey}&language=en-US`;
+
+        return fetch(episodeDetailsUrl)
+          .then(response => response.json())
+          .then(episodeData => {
+            data.episode_name = episodeData.name;
+            data.episode_overview = episodeData.overview;
+            displayDetails(data, mediaType);
+          });
+      } else {
+        displayDetails(data, mediaType);
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching details:', error);
+      detailsContainer.innerHTML = '<p>Error fetching details</p>';
+    });
+}
+
 
 function openVideo(id, mediaType) {
   if (mediaType === 'movie') {
