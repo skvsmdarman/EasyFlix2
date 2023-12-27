@@ -116,3 +116,15 @@ select {
 .result-card p {
   margin: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  #videoOptions {
+    text-align: center;
+  }
+
+  select {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
