@@ -5,7 +5,9 @@ const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
 let apiKey;
-fetch('config.json')
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('config.json')
   .then(response => response.json())
   .then(data => {
     apiKey = data.apiKey;
@@ -13,7 +15,6 @@ fetch('config.json')
   .catch(error => {
     console.error('Error fetching API key:', error);
   });
-document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
