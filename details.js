@@ -13,7 +13,6 @@ fetch('config.json')
   .catch(error => {
     console.error('Error fetching API key:', error);
   });
-console.log(${apiKey})
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
