@@ -4,6 +4,10 @@ const resultsContainer = document.getElementById('results');
 
 function searchMovies() {
   const query = searchInput.value;
+  if (query === '') {
+    resultsContainer.innerHTML = '';
+    return;
+  }
 
   if (query.trim() !== '') {
     const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
