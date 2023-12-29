@@ -1,20 +1,13 @@
+let apiKey;
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
-let apiKey;
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('config.json')
-  .then(response => response.json())
-  .then(data => {
-    apiKey = data.apiKey;
-  })
-  .catch(error => {
-    console.error('Error fetching API key:', error);
-  });
+  fetchApiKey();
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
@@ -26,7 +19,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+function fetchApiKey() {
+  fetch('config.json')
+    .then(response => response.json())
+    .then(data => {
+      apiKey = data.apiKey;
+    })
+    .catch(error => {
+      console.error('Error fetching API key:', error);
+    });
+}
+
 function showDetails(id, mediaType) {
+  if (!apiKey) {
+    console.error('API key is not available.');
+    return;
+  }
+  
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
