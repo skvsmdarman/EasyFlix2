@@ -1,10 +1,18 @@
-const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
+let apiKey;
+fetch('config.json')
+  .then(response => response.json())
+  .then(data => {
+    apiKey = data.apiKey;
+  })
+  .catch(error => {
+    console.error('Error fetching API key:', error);
+  });
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
