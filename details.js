@@ -139,10 +139,8 @@ function goHome() {
 }
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
-  // Construct the URL for fetching episode details
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
-  // Fetch episode details
   fetch(episodeDetailsUrl)
     .then(response => response.json())
     .then(details => {
