@@ -201,6 +201,7 @@ select {
 .features-section li {
   margin-bottom: 15px;
   font-size: 1.1em;
+  color: #3498db; 
 }
 
 .faq-section h2,
