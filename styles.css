@@ -130,7 +130,6 @@ select {
   }
 }
 
-/* FAQ Section */
 .faq-section {
   margin-top: 40px;
 }
@@ -194,14 +193,15 @@ select {
 }
 
 .features-section ul {
-  list-style-type: none;
+  list-style-type: circle;
   padding: 0;
 }
 
 .features-section li {
   margin-bottom: 15px;
   font-size: 1.1em;
-  color: #3498db; 
+  color: #3498db;
+  font-weight: bold;
 }
 
 .faq-section h2,
