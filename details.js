@@ -95,14 +95,6 @@ function openVideo(id, mediaType) {
   }
 }
 
-function updateVideo(id) {
-  const selectedSeason = seasonSelect.value;
-  const selectedEpisode = episodeSelect.value;
-
-  videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="400px" frameborder="0" allowfullscreen></iframe>`;
- console.log('ID:', id, 'Selected Season:', selectedSeason, 'Selected Episode:', selectedEpisode);
-}
-
 
 function setupSeriesOptions(tvDetails) {
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
@@ -139,6 +131,8 @@ function goHome() {
 }
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+
+  videoContainer.innerHTML = '';
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
   fetch(episodeDetailsUrl)
