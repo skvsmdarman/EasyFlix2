@@ -1,21 +1,9 @@
+const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
-let apiKey;
-fetch('config.json')
-  .then(response => response.json())
-  .then(data => {
-    apiKey = data.apiKey;
-  })
-  .catch(error => {
-    console.error('Error fetching API key:', error);
-  });
 
 function searchMovies() {
   const query = searchInput.value;
-  if (query === '') {
-    resultsContainer.innerHTML = '';
-    return;
-  }
 
   if (query.trim() !== '') {
     const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;

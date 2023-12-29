@@ -1,4 +1,4 @@
-let apiKey;
+const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
@@ -7,7 +7,6 @@ const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetchApiKey();
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
@@ -19,23 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function fetchApiKey() {
-  fetch('config.json')
-    .then(response => response.json())
-    .then(data => {
-      apiKey = data.apiKey;
-    })
-    .catch(error => {
-      console.error('Error fetching API key:', error);
-    });
-}
-
 function showDetails(id, mediaType) {
-  if (!apiKey) {
-    console.error('API key is not available.');
-    return;
-  }
-  
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
@@ -156,8 +139,10 @@ function goHome() {
 }
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+  // Construct the URL for fetching episode details
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
+  // Fetch episode details
   fetch(episodeDetailsUrl)
     .then(response => response.json())
     .then(details => {

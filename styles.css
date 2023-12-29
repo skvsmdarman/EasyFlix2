@@ -106,7 +106,7 @@ select {
 }
 
 .result-card p.title {
-  color: #2ecc71;
+  color: #00ff00;
 }
 
 #results p.noResults{
@@ -128,39 +128,4 @@ select {
     margin: 0 auto;
     margin-bottom: 10px;
   }
-}
-
-.faq-section,
-.features-section {
-  margin-top: 40px;
-}
-
-.faq-item {
-  margin-bottom: 20px;
-}
-
-.faq-item h3 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  color: #3498db;
-}
-
-.faq-section h2,
-.features-section h2 {
-  margin-bottom: 20px;
-  text-align: center;
-  color: #2ecc71;
-}
-
-.features-section ul {
-  list-style-type: decimal;
-  padding: 0;
-}
-
-.features-section li {
-  margin-bottom: 15px;
-  font-size: 1.1em;
-  color: #3498db;
-  font-weight: bold;
-  margin-left: 20px;
 }
