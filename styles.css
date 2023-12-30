@@ -167,10 +167,9 @@ select {
 
 footer {
   background-color: #2c3e50;
-  color: #fff;
+  color: #2ecc71;
   text-align: center;
   padding: 10px;
-  position: fixed;
   bottom: 0;
   width: 100%;
 }
