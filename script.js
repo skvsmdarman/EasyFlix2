@@ -1,4 +1,4 @@
-import { apiKey, apiBaseUrl } from './config';
+const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
@@ -10,8 +10,8 @@ function searchMovies() {
   }
 
   if (query.trim() !== '') {
-    const apiUrl = `${apiBaseUrl}/search/multi?api_key=${apiKey}&query=${query}`;
-
+    const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
+    
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -22,15 +22,12 @@ function searchMovies() {
       });
   }
 }
-
 function displayResults(results) {
   resultsContainer.innerHTML = '';
-
   if (results.length === 0) {
     resultsContainer.innerHTML = '<p class="noResults">No results found.</p>';
     return;
   }
-
   results.forEach(result => {
     if (result.media_type !== 'person') {
       const resultCard = document.createElement('div');
@@ -47,17 +44,13 @@ function displayResults(results) {
     }
   });
 }
-
-
 function getReleaseYear(result) {
   const releaseDate = result.release_date || result.first_air_date;
   return releaseDate ? new Date(releaseDate).getFullYear() : '';
 }
-
 function showDetails(id, mediaType) {
   window.location.href = `details.html?id=${id}&mediaType=${mediaType}`;
 }
-
 function handleSearchFormSubmit(event) {
   event.preventDefault();
   searchMovies();
