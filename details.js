@@ -1,4 +1,4 @@
-import { apiKey, videoHostingServiceUrl, maxVideoHeight, aspectRatio } from './config';
+import { apiKey, apiBaseUrl, videoHostingServiceUrl, maxVideoHeight, aspectRatio } from './config';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
