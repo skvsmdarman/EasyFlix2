@@ -4,7 +4,7 @@ const videoHostingServiceUrl = 'https://vidsrc.to/embed';
 const maxVideoHeight = 400;
 const aspectRatio = 16 / 9;
 
-export {
+module.export {
   apiKey,
   apiBaseUrl,
   videoHostingServiceUrl,
