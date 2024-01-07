@@ -1,4 +1,4 @@
-const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
+import { apiKey, apiBaseUrl } from './config';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
@@ -10,7 +10,7 @@ function searchMovies() {
   }
 
   if (query.trim() !== '') {
-    const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
+    const apiUrl = `${apiBaseUrl}/search/multi?api_key=${apiKey}&query=${query}`;
 
     fetch(apiUrl)
       .then(response => response.json())
