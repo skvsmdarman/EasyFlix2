@@ -1,4 +1,4 @@
-import { apiKey, apiBaseUrl } from './config';
+import { apiKey, videoHostingServiceUrl, maxVideoHeight, aspectRatio } from './config';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
@@ -82,8 +82,7 @@ function displayDetails(details, mediaType) {
 function openVideo(id, mediaType) {
 
   const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  const aspectRatio = 16 / 9;
-  const videoHeight = Math.min(screenWidth * (1 / aspectRatio), ${maxVideoHeight});
+  const videoHeight = Math.min(screenWidth * (1 / ${aspectRatio}), ${maxVideoHeight});
   
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="${videoHostingServiceUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
