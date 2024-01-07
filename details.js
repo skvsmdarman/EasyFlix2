@@ -1,4 +1,4 @@
-const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
+import { apiKey, apiBaseUrl } from './config';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
