@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function showDetails(id, mediaType) {
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
-  
+
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
@@ -73,7 +73,7 @@ function openVideo(id, mediaType) {
   const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const aspectRatio = 16 / 9;
   const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
-  
+
   if (mediaType === 'movie') {
     videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
@@ -111,8 +111,8 @@ function goHome() {
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
 
   videoContainer.innerHTML = '';
-   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
-  
+  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
+
   fetch(episodeDetailsUrl)
     .then(response => response.json())
     .then(details => {

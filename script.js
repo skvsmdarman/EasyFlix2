@@ -11,7 +11,7 @@ function searchMovies() {
 
   if (query.trim() !== '') {
     const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
-    
+
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {

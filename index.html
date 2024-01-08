@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
@@ -12,10 +13,11 @@
   <link rel="stylesheet" href="styles.css">
   <title>EasyFlix2</title>
 </head>
+
 <body>
   <div class="container">
     <h1>EasyFlix2</h1>
-    
+
     <form id="searchOption" onsubmit="handleSearchFormSubmit(event)">
       <input type="text" id="searchInput" oninput="searchMovies()" placeholder="Search for a movie or TV series">
       <button id="searchButton" onclick="searchMovies()">Search</button>
@@ -23,12 +25,13 @@
 
     <div id="results"></div>
 
-    <br><br/>
+    <br><br />
     <section class="faq-section">
       <h2>Frequently Asked Questions (FAQ)</h2>
       <div class="faq-item">
         <h3>1. Is the website a streaming platform?</h3>
-        <p>This website uses The Movie Database to search for movies and series, providing details. However, the actual streaming is facilitated through a third-party server.</p>
+        <p>This website uses The Movie Database to search for movies and series, providing details. However, the actual
+          streaming is facilitated through a third-party server.</p>
       </div>
       <div class="faq-item">
         <h3>2. How does the Auto Update feature work?</h3>
@@ -40,7 +43,9 @@
       </div>
       <div class="faq-item">
         <h3>4. Can I watch any movie or TV series I search for?</h3>
-        <p><u>Please note that all search results may not be available for streaming</u>. If the video is available on the server, you can watch it. However, there are over 50,000 movies available, and the collection keeps updating every minute.</p>
+        <p><u>Please note that all search results may not be available for streaming</u>. If the video is available on
+          the server, you can watch it. However, there are over 50,000 movies available, and the collection keeps
+          updating every minute.</p>
       </div>
     </section>
 
@@ -62,4 +67,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

@@ -35,13 +35,15 @@ button {
   cursor: pointer;
 }
 
-button#homeButton, button#searchButton {
+button#homeButton,
+button#searchButton {
   background-color: #3498db;
   color: #fff;
   border: none;
 }
 
-#results, #details {
+#results,
+#details {
   margin-top: 20px;
 }
 
@@ -109,7 +111,7 @@ select {
   color: #2ecc71;
 }
 
-#results p.noResults{
+#results p.noResults {
   color: red;
 }
 
