@@ -1,4 +1,5 @@
 const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
+const videoBaseUrl = 'https://vidsrc.to/embed';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
@@ -75,12 +76,12 @@ function openVideo(id, mediaType) {
   const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
 
   if (mediaType === 'movie') {
-    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
-  } else if (mediaType === 'tv') {
-    const selectedSeason = seasonSelect.value;
-    const selectedEpisode = episodeSelect.value;
-    videoContainer.innerHTML = `<iframe src="https://vidsrc.to/embed/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
-  }
+  videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+} else if (mediaType === 'tv') {
+  const selectedSeason = seasonSelect.value;
+  const selectedEpisode = episodeSelect.value;
+  videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+}
 }
 function setupSeriesOptions(tvDetails) {
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
