@@ -1,5 +1,5 @@
 const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
-const videoBaseUrl = 'https://vidsrc.to/embed';
+const videoBaseUrl = 'https://vidsrc.cc/v2/embed';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
