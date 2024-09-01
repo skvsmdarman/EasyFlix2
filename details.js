@@ -5,14 +5,14 @@ const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
-var videoContainer = document.getElementById('videoContainer');
+const videoContainer = document.getElementById('videoContainer');
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
-  const season = params.get('season');
-  const episode = params.get('episode');
+  let season = params.get('season');
+  let episode = params.get('episode');
 
   if (id && mediaType) {
     showDetails(id, mediaType, season, episode);
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-function showDetails(id, mediaType, season, episode) {
+function showDetails(id, mediaType, initialSeason, initialEpisode) {
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
-      displayDetails(data, mediaType, season, episode);
+      displayDetails(data, mediaType, initialSeason, initialEpisode);
     })
     .catch(error => {
       console.error('Error fetching details:', error);
@@ -70,14 +70,16 @@ function setupSeriesOptions(tvDetails, initialSeason, initialEpisode) {
     seasonSelect.appendChild(option);
   });
 
-  // Set default values if no initial values provided
-  const selectedSeason = initialSeason && regularSeasons.some(season => season.season_number == initialSeason) ? initialSeason : (regularSeasons.length > 0 ? regularSeasons[0].season_number : '');
-  const selectedEpisode = initialEpisode && tvDetails.seasons.find(season => season.season_number === parseInt(selectedSeason))?.episode_count >= initialEpisode ? initialEpisode : (selectedSeason && tvDetails.seasons.find(season => season.season_number === parseInt(selectedSeason))?.episode_count > 0 ? 1 : '');
+  // Default to the first season if not provided or invalid
+  let selectedSeason = initialSeason && regularSeasons.some(season => season.season_number == initialSeason) ? initialSeason : (regularSeasons.length > 0 ? regularSeasons[0].season_number : '');
 
   if (selectedSeason) {
     seasonSelect.value = selectedSeason;
     seasonSelect.dispatchEvent(new Event('change')); // Populate episodes
   }
+
+  // Default to the first episode if not provided or invalid
+  let selectedEpisode = initialEpisode && tvDetails.seasons.find(season => season.season_number === parseInt(selectedSeason))?.episode_count >= initialEpisode ? initialEpisode : (selectedSeason && tvDetails.seasons.find(season => season.season_number === parseInt(selectedSeason))?.episode_count > 0 ? 1 : '');
 
   if (selectedEpisode) {
     episodeSelect.value = selectedEpisode;
@@ -108,49 +110,11 @@ function openVideo(id, mediaType) {
 
 function updateURLParams(season, episode) {
   const params = new URLSearchParams(window.location.search);
-  params.set('season', season || '');
-  params.set('episode', episode || '');
+  params.set('season', season);
+  params.set('episode', episode);
   window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
 }
 
 function goHome() {
   window.location.href = 'index.html';
 }
-
-function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
-  videoContainer.innerHTML = '';
-  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
-
-  fetch(episodeDetailsUrl)
-    .then(response => response.json())
-    .then(details => {
-      const episodeDetailsContainer = document.getElementById('episodeDetails');
-      if (details.error) {
-        episodeDetailsContainer.innerHTML = `<p>${details.error}</p>`;
-      } else {
-        episodeDetailsContainer.innerHTML = `
-          <h3 style="color: #3498db;">${details.name}</h3>
-          <p><strong>Overview: </strong>${details.overview}</p>
-          <p><strong>Air Date: </strong>${details.air_date}</p>
-        `;
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching episode details:', error);
-    });
-}
-
-// Update episode details when season or episode changes
-seasonSelect.addEventListener('change', () => {
-  const selectedSeason = seasonSelect.value;
-  const selectedEpisode = episodeSelect.value;
-  updateEpisodeDetails(details.id, selectedSeason, selectedEpisode);
-  updateURLParams(selectedSeason, selectedEpisode);
-});
-
-episodeSelect.addEventListener('change', () => {
-  const selectedSeason = seasonSelect.value;
-  const selectedEpisode = episodeSelect.value;
-  updateEpisodeDetails(details.id, selectedSeason, selectedEpisode);
-  updateURLParams(selectedSeason, selectedEpisode);
-});
