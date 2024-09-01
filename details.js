@@ -35,7 +35,7 @@ function showDetails(id, mediaType, season, episode) {
     });
 }
 
-function displayDetails(details, mediaType, season, episode) {
+function displayDetails(details, mediaType, initialSeason, initialEpisode) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
   detailsContainer.innerHTML = `
     <div style="text-align: center; margin-bottom: 20px;">
@@ -53,7 +53,7 @@ function displayDetails(details, mediaType, season, episode) {
   if (mediaType === 'movie') {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'movie'));
   } else if (mediaType === 'tv') {
-    setupSeriesOptions(details, season, episode);
+    setupSeriesOptions(details, initialSeason, initialEpisode);
     videoOptionsContainer.style.display = 'block';
   }
 }
@@ -84,7 +84,7 @@ function setupSeriesOptions(tvDetails, initialSeason, initialEpisode) {
   }
 
   // Update URL params based on current selections
-  updateURLParams();
+  updateURLParams(selectedSeason, selectedEpisode);
 }
 
 function openVideo(id, mediaType) {
@@ -106,12 +106,10 @@ function openVideo(id, mediaType) {
   }
 }
 
-function updateURLParams() {
-  const season = seasonSelect.value;
-  const episode = episodeSelect.value;
+function updateURLParams(season, episode) {
   const params = new URLSearchParams(window.location.search);
-  params.set('season', season);
-  params.set('episode', episode);
+  params.set('season', season || '');
+  params.set('episode', episode || '');
   window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
 }
 
@@ -141,3 +139,18 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
       console.error('Error fetching episode details:', error);
     });
 }
+
+// Update episode details when season or episode changes
+seasonSelect.addEventListener('change', () => {
+  const selectedSeason = seasonSelect.value;
+  const selectedEpisode = episodeSelect.value;
+  updateEpisodeDetails(details.id, selectedSeason, selectedEpisode);
+  updateURLParams(selectedSeason, selectedEpisode);
+});
+
+episodeSelect.addEventListener('change', () => {
+  const selectedSeason = seasonSelect.value;
+  const selectedEpisode = episodeSelect.value;
+  updateEpisodeDetails(details.id, selectedSeason, selectedEpisode);
+  updateURLParams(selectedSeason, selectedEpisode);
+});
