@@ -10,8 +10,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
+  const seasonNumber = params.get('season');
+  const episodeNumber = params.get('episode');
+
   if (id && mediaType) {
     showDetails(id, mediaType);
+
+    // If season and episode parameters are present, load the episode details
+    if (mediaType === 'tv' && seasonNumber && episodeNumber) {
+      updateEpisodeDetails(id, seasonNumber, episodeNumber);
+      seasonSelect.value = seasonNumber;
+      episodeSelect.value = episodeNumber;
+    }
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
@@ -110,8 +120,11 @@ function goHome() {
   window.location.href = 'index.html';
 }
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
+  // Update the URL without reloading the page
+  const newUrl = `${window.location.pathname}?id=${seriesId}&mediaType=tv&season=${seasonNumber}&episode=${episodeNumber}`;
+  window.history.replaceState({ path: newUrl }, '', newUrl);
 
-  videoContainer.innerHTML = '';
+  // Fetch and display the episode details as usual
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
   fetch(episodeDetailsUrl)
