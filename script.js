@@ -48,9 +48,15 @@ function getReleaseYear(result) {
   const releaseDate = result.release_date || result.first_air_date;
   return releaseDate ? new Date(releaseDate).getFullYear() : '';
 }
+
 function showDetails(id, mediaType) {
-  window.location.href = `details.html?id=${id}&mediaType=${mediaType}`;
+  if (mediaType === 'movie') {
+    window.location.href = `movieDetails.html?id=${id}`;
+  } else if (mediaType === 'tv') {
+    window.location.href = `episodeDetails.html?id=${id}`;
+  }
 }
+
 function handleSearchFormSubmit(event) {
   event.preventDefault();
   searchMovies();
