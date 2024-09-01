@@ -92,18 +92,31 @@ function openVideo(id, mediaType) {
   videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
 }
 }
+
 function setupSeriesOptions(tvDetails) {
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
+
+  const params = new URLSearchParams(window.location.search);
+  const seasonNumber = parseInt(params.get('season'), 10);
+  const episodeNumber = parseInt(params.get('episode'), 10);
+
   regularSeasons.forEach(season => {
     const option = document.createElement('option');
     option.value = season.season_number;
     option.textContent = `Season ${season.season_number}`;
     seasonSelect.appendChild(option);
   });
+
+  if (seasonNumber) {
+    seasonSelect.value = seasonNumber;
+    seasonSelect.dispatchEvent(new Event('change'));
+  }
+
   seasonSelect.addEventListener('change', () => {
     const selectedSeason = parseInt(seasonSelect.value, 10);
     const selectedSeasonDetails = regularSeasons.find(season => season.season_number === selectedSeason);
     episodeSelect.innerHTML = '';
+
     if (selectedSeasonDetails) {
       for (let i = 1; i <= selectedSeasonDetails.episode_count; i++) {
         const option = document.createElement('option');
@@ -111,10 +124,18 @@ function setupSeriesOptions(tvDetails) {
         option.textContent = `Episode ${i}`;
         episodeSelect.appendChild(option);
       }
+
+      if (selectedSeason === seasonNumber && episodeNumber) {
+        episodeSelect.value = episodeNumber;
+      }
     }
   });
-  seasonSelect.dispatchEvent(new Event('change'));
+
+  if (seasonNumber) {
+    seasonSelect.dispatchEvent(new Event('change'));
+  }
 }
+
 function goHome() {
   window.location.href = 'index.html';
 }
