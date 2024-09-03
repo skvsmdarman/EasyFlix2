@@ -1,3 +1,5 @@
+import config from './config.js';
+
 const apiKey = `${config.tmdbKey}`;
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
