@@ -1,4 +1,4 @@
-const apiKey = ${config.tmdbKey};
+const apiKey = `${config.tmdbKey}`;
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
