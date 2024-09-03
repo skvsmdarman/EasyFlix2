@@ -1,4 +1,3 @@
-details.js
 const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
 const videoBaseUrl = 'https://vidsrc.cc/v2/embed';
 const detailsContainer = document.getElementById('details');
@@ -7,45 +6,45 @@ const videoOptionsContainer = document.getElementById('videoOptions');
 const seasonSelect = document.getElementById('seasonSelect');
 const episodeSelect = document.getElementById('episodeSelect');
 var videoContainer = document.getElementById('videoContainer');
+
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const mediaType = params.get('mediaType');
+  const season = params.get('season');
+  const episode = params.get('episode');
+  
   if (id && mediaType) {
-    showDetails(id, mediaType);
+    showDetails(id, mediaType, season, episode);
   } else {
     detailsContainer.innerHTML = '<p>Invalid request</p>';
   }
 });
 
-function showDetails(id, mediaType) {
+function showDetails(id, mediaType, season, episode) {
   const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
     .then(data => {
       displayDetails(data, mediaType);
+      if (mediaType === 'tv') {
+        setupSeriesOptions(data, season, episode);
+      }
       watchNowButton.addEventListener('click', () => {
         const selectedSeason = seasonSelect.value;
         const selectedEpisode = episodeSelect.value;
         openVideo(id, mediaType, selectedSeason, selectedEpisode);
       });
-      seasonSelect.addEventListener('change', () => {
-        const selectedSeason = seasonSelect.value;
-        const selectedEpisode = episodeSelect.value;
-        updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-      });
-      episodeSelect.addEventListener('change', () => {
-        const selectedSeason = seasonSelect.value;
-        const selectedEpisode = episodeSelect.value;
-        updateEpisodeDetails(id, selectedSeason, selectedEpisode);
-      });
+      seasonSelect.addEventListener('change', () => updateSelectors(id));
+      episodeSelect.addEventListener('change', () => updateSelectors(id));
     })
     .catch(error => {
       console.error('Error fetching details:', error);
       detailsContainer.innerHTML = '<p>Error fetching details</p>';
     });
 }
+
 function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
   detailsContainer.innerHTML = `
@@ -71,47 +70,74 @@ function displayDetails(details, mediaType) {
     watchNowButton.addEventListener('click', () => openVideo(details.id, 'tv'));
   }
 }
-function openVideo(id, mediaType) {
+
+function openVideo(id, mediaType, season, episode) {
   const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
   const aspectRatio = 16 / 9;
   const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
 
   if (mediaType === 'movie') {
-  videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
-} else if (mediaType === 'tv') {
-  const selectedSeason = seasonSelect.value;
-  const selectedEpisode = episodeSelect.value;
-  videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${selectedSeason}/${selectedEpisode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+  } else if (mediaType === 'tv') {
+    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${season}/${episode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+  }
 }
-}
-function setupSeriesOptions(tvDetails) {
+
+function setupSeriesOptions(tvDetails, initialSeason, initialEpisode) {
   const regularSeasons = tvDetails.seasons.filter(season => season.season_number !== 0);
+  seasonSelect.innerHTML = '';
   regularSeasons.forEach(season => {
     const option = document.createElement('option');
     option.value = season.season_number;
     option.textContent = `Season ${season.season_number}`;
     seasonSelect.appendChild(option);
   });
-  seasonSelect.addEventListener('change', () => {
-    const selectedSeason = parseInt(seasonSelect.value, 10);
-    const selectedSeasonDetails = regularSeasons.find(season => season.season_number === selectedSeason);
-    episodeSelect.innerHTML = '';
-    if (selectedSeasonDetails) {
-      for (let i = 1; i <= selectedSeasonDetails.episode_count; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `Episode ${i}`;
-        episodeSelect.appendChild(option);
-      }
-    }
-  });
-  seasonSelect.dispatchEvent(new Event('change'));
-}
-function goHome() {
-  window.location.href = 'index.html';
-}
-function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
 
+  seasonSelect.value = initialSeason || 1;
+  populateEpisodes(tvDetails, initialSeason || 1, initialEpisode);
+
+  seasonSelect.addEventListener('change', () => {
+    populateEpisodes(tvDetails, seasonSelect.value);
+  });
+}
+
+function populateEpisodes(tvDetails, selectedSeason, initialEpisode) {
+  const selectedSeasonDetails = tvDetails.seasons.find(season => season.season_number === parseInt(selectedSeason, 10));
+  episodeSelect.innerHTML = '';
+  if (selectedSeasonDetails) {
+    for (let i = 1; i <= selectedSeasonDetails.episode_count; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = `Episode ${i}`;
+      episodeSelect.appendChild(option);
+    }
+  }
+  episodeSelect.value = initialEpisode || 1;
+  updateSelectors(tvDetails.id);
+}
+
+function updateSelectors(seriesId) {
+  const season = seasonSelect.value;
+  const episode = episodeSelect.value;
+  updateUrl(seriesId, 'tv', season, episode);
+  updateEpisodeDetails(seriesId, season, episode);
+}
+
+function updateUrl(id, mediaType, season, episode) {
+  const url = new URL(window.location);
+  url.searchParams.set('id', id);
+  url.searchParams.set('mediaType', mediaType);
+  if (mediaType === 'tv') {
+    url.searchParams.set('season', season);
+    url.searchParams.set('episode', episode);
+  } else {
+    url.searchParams.delete('season');
+    url.searchParams.delete('episode');
+  }
+  window.history.pushState({}, '', url);
+}
+
+function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   videoContainer.innerHTML = '';
   const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
@@ -132,4 +158,8 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
     .catch(error => {
       console.error('Error fetching episode details:', error);
     });
+}
+
+function goHome() {
+  window.location.href = 'index.html';
 }
