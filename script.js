@@ -1,4 +1,4 @@
-const apiKey = 'ec98dcc4e185de0a0b10683fcc3b21f3';
+const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
