@@ -1,5 +1,5 @@
 const config = {
-    tmdbKey: 'ec98dcc4e185de0a0b10683fcc3b21f3',
+    tmdbKey: 'b5241bb6a49b350b54d6ae5ba084cde7',
     tmdbUrl: 'https://api.themoviedb.org/3',
     tmdbPoster: 'https://image.tmdb.org/t/p/w300',
     videoUrl: 'https://vidsrc.cc/v2/embed'
