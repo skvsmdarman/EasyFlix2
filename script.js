@@ -1,4 +1,4 @@
-const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
+const apiKey = ${config.tmdbKey};
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
@@ -10,7 +10,7 @@ function searchMovies() {
   }
 
   if (query.trim() !== '') {
-    const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
+    const apiUrl = `${config.tmdbUrl}/search/multi?api_key=${apiKey}&query=${query}`;
 
     fetch(apiUrl)
       .then(response => response.json())
