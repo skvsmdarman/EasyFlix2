@@ -165,3 +165,4 @@ function goHome() {
 }
 
 window.goHome = goHome;
+window.openVideo = openVideo;
