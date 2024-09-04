@@ -1,5 +1,9 @@
-const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
+const tmdbApiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
 const videoBaseUrl = 'https://vidsrc.cc/v2/embed';
+const tmdbBaseUrl = 'https://api.themoviedb.org/3';
+const tmdbPosterurl = 'https://image.tmdb.org/t/p';
+
+
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDetails(id, mediaType, season, episode) {
-  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+  const detailsUrl = `${tmdbBaseUrl}/${mediaType}/${id}?api_key=${tmdbApiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
@@ -49,7 +53,7 @@ function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
   detailsContainer.innerHTML = `
   <div style="text-align: center; margin-bottom: 20px;">
-    <img src="https://image.tmdb.org/t/p/w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
+    <img src="${tmdbPosterurl}/w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
   </div>
   <h2 style="text-align: center; color: #3498db;">${details.title || details.name}</h2>
   <p><strong>Type:</strong> ${mediaType}</p>
@@ -139,7 +143,7 @@ function updateUrl(id, mediaType, season, episode) {
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   videoContainer.innerHTML = '';
-  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
+  const episodeDetailsUrl = `${tmdbBaseUrl}/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${tmdbApiKey}`;
 
   fetch(episodeDetailsUrl)
     .then(response => response.json())
