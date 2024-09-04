@@ -32,7 +32,7 @@ function displayResults(results) {
       const resultCard = document.createElement('div');
       resultCard.classList.add('result-card');
       resultCard.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
+        <img src="${config.tmdbPosterUrl}w92${result.poster_path}" alt="${result.title || result.name}">
         <div>
           <p class="title">${result.title || result.name}</p>
           <p>${result.media_type} (${getReleaseYear(result)})</p>
