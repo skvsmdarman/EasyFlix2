@@ -1,3 +1,4 @@
+const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
 const searchInput = document.getElementById('searchInput');
 const resultsContainer = document.getElementById('results');
 
@@ -9,7 +10,7 @@ function searchMovies() {
   }
 
   if (query.trim() !== '') {
-    const apiUrl = `${config.tmdbBaseUrl}/search/multi?api_key=${config.tmdbApiKey}&query=${query}`;
+    const apiUrl = `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${query}`;
 
     fetch(apiUrl)
       .then(response => response.json())
@@ -32,7 +33,7 @@ function displayResults(results) {
       const resultCard = document.createElement('div');
       resultCard.classList.add('result-card');
       resultCard.innerHTML = `
-        <img src="${config.tmdbPosterUrl}w92${result.poster_path}" alt="${result.title || result.name}">
+        <img src="https://image.tmdb.org/t/p/w92${result.poster_path}" alt="${result.title || result.name}">
         <div>
           <p class="title">${result.title || result.name}</p>
           <p>${result.media_type} (${getReleaseYear(result)})</p>
@@ -60,6 +61,3 @@ function handleSearchFormSubmit(event) {
   event.preventDefault();
   searchMovies();
 }
-
-window.handleSearchFormSubmit = handleSearchFormSubmit;
-window.searchMovies = searchMovies;

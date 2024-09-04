@@ -1,5 +1,5 @@
-import config from './config.js';
-
+const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
+const videoBaseUrl = 'https://vidsrc.cc/v2/embed';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
 const videoOptionsContainer = document.getElementById('videoOptions');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDetails(id, mediaType, season, episode) {
-  const detailsUrl = `${config.tmdbBaseUrl}/${mediaType}/${id}?api_key=${config.tmdbApiKey}`;
+  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
@@ -49,7 +49,7 @@ function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
   detailsContainer.innerHTML = `
   <div style="text-align: center; margin-bottom: 20px;">
-    <img src="${config.tmdbPosterUrl}w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
+    <img src="https://image.tmdb.org/t/p/w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
   </div>
   <h2 style="text-align: center; color: #3498db;">${details.title || details.name}</h2>
   <p><strong>Type:</strong> ${mediaType}</p>
@@ -77,9 +77,9 @@ function openVideo(id, mediaType, season, episode) {
   const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
 
   if (mediaType === 'movie') {
-    videoContainer.innerHTML = `<iframe src="${config.vidsrcBaseUrl}}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    videoContainer.innerHTML = `<iframe src="${config.vidsrcBaseUrl}}/tv/${id}/${season}/${episode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${season}/${episode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   }
 }
 
@@ -139,7 +139,7 @@ function updateUrl(id, mediaType, season, episode) {
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   videoContainer.innerHTML = '';
-  const episodeDetailsUrl = `${config.tmdbBaseUrl}/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${config.tmdbApiKey}`;
+  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
   fetch(episodeDetailsUrl)
     .then(response => response.json())
@@ -163,6 +163,3 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
 function goHome() {
   window.location.href = 'index.html';
 }
-
-window.goHome = goHome;
-window.openVideo = openVideo;
