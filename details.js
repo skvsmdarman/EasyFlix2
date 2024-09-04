@@ -49,7 +49,7 @@ function displayDetails(details, mediaType) {
   const genres = details.genres ? details.genres.map(genre => genre.name).join(', ') : '';
   detailsContainer.innerHTML = `
   <div style="text-align: center; margin-bottom: 20px;">
-    <img src="${config.tmdbDetailsPosterUrl}${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
+    <img src="${config.tmdbDetailsPosterUrl}w300${details.poster_path}" alt="${details.title || details.name}" style="max-width: 100%;">
   </div>
   <h2 style="text-align: center; color: #3498db;">${details.title || details.name}</h2>
   <p><strong>Type:</strong> ${mediaType}</p>
