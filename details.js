@@ -1,6 +1,5 @@
 import config from './config.js';
 
-const apiKey = 'b5241bb6a49b350b54d6ae5ba084cde7';
 const videoBaseUrl = 'https://vidsrc.cc/v2/embed';
 const detailsContainer = document.getElementById('details');
 const watchNowButton = document.getElementById('watchNowButton');
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDetails(id, mediaType, season, episode) {
-  const detailsUrl = `${config.tmdbBaseUrl}/${mediaType}/${id}?api_key=${apiKey}`;
+  const detailsUrl = `${config.tmdbBaseUrl}/${mediaType}/${id}?api_key=${config.tmdbApiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
@@ -141,7 +140,7 @@ function updateUrl(id, mediaType, season, episode) {
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   videoContainer.innerHTML = '';
-  const episodeDetailsUrl = `${config.tmdbBaseUrl}/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
+  const episodeDetailsUrl = `${config.tmdbBaseUrl}/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${config.tmdbApiKey}`;
 
   fetch(episodeDetailsUrl)
     .then(response => response.json())
