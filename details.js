@@ -78,9 +78,9 @@ function openVideo(id, mediaType, season, episode) {
   const videoHeight = Math.min(screenWidth * (1 / aspectRatio), 400);
 
   if (mediaType === 'movie') {
-    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="${config.vidsrcBaseUrl}}/movie/${id}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   } else if (mediaType === 'tv') {
-    videoContainer.innerHTML = `<iframe src="${videoBaseUrl}/tv/${id}/${season}/${episode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe src="${config.vidsrcBaseUrl}}/tv/${id}/${season}/${episode}" width="100%" height="${videoHeight}px" frameborder="0" allowfullscreen></iframe>`;
   }
 }
 
