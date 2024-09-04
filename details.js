@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDetails(id, mediaType, season, episode) {
-  const detailsUrl = `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}`;
+  const detailsUrl = `${config.tmdbBaseUrl}/${mediaType}/${id}?api_key=${apiKey}`;
 
   fetch(detailsUrl)
     .then(response => response.json())
@@ -141,7 +141,7 @@ function updateUrl(id, mediaType, season, episode) {
 
 function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
   videoContainer.innerHTML = '';
-  const episodeDetailsUrl = `https://api.themoviedb.org/3/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
+  const episodeDetailsUrl = `${config.tmdbBaseUrl}/tv/${seriesId}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}`;
 
   fetch(episodeDetailsUrl)
     .then(response => response.json())
