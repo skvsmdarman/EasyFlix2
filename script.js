@@ -14,7 +14,7 @@ function searchMovies() {
   }
 
   if (query.trim() !== '') {
-    const apiUrl = `${tmdbBaseUrl}/search/multi?api_key=${apiKey}&query=${query}`;
+    const apiUrl = `${tmdbBaseUrl}/search/multi?api_key=${tmdbApiKey}&query=${query}`;
 
     fetch(apiUrl)
       .then(response => response.json())
