@@ -60,3 +60,6 @@ function handleSearchFormSubmit(event) {
   event.preventDefault();
   searchMovies();
 }
+
+window.handleSearchFormSubmit = handleSearchFormSubmit;
+window.searchMovies = searchMovies;
