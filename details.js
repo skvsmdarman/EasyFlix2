@@ -163,3 +163,5 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
 function goHome() {
   window.location.href = 'index.html';
 }
+
+window.goHome = goHome;
