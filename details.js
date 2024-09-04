@@ -160,6 +160,6 @@ function updateEpisodeDetails(seriesId, seasonNumber, episodeNumber) {
     });
 }
 
-function goHome() {
+window.goHome = function() {
   window.location.href = 'index.html';
 }
